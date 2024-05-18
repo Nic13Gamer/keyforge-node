@@ -1,5 +1,5 @@
 {
-  "name": "keyforge",
+  "name": "keyforge-js",
   "version": "0.0.1",
   "description": "Node.js library for interacting with the Keyforge API",
   "main": "dist/index.js",
