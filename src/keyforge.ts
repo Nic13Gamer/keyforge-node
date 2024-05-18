@@ -53,8 +53,10 @@ export class Keyforge {
     const response = await fetch(`${baseUrl}${path}`, options);
 
     if (!response.ok) {
+      const bodyText = await response.text();
+
       let error: KeyforgeError = {
-        message: await response.text(),
+        message: bodyText,
         status: response.status,
         name: KEYFORGE_ERROR_CODES_BY_KEY[
           response.status as keyof typeof KEYFORGE_ERROR_CODES_BY_KEY
@@ -62,7 +64,7 @@ export class Keyforge {
       };
 
       try {
-        const body = await response.json();
+        const body = JSON.parse(bodyText);
 
         const message = body.message || body.error.issues || body.error.message;
 
