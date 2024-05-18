@@ -1,6 +1,7 @@
 import { version } from '../package.json';
 import { KeyforgeError } from './error';
 import { Licenses } from './licenses/licenses';
+import { Portal } from './portal/portal';
 import { Products } from './products/products';
 import {
   GetOptions,
@@ -26,6 +27,7 @@ export class Keyforge {
 
   readonly products = new Products(this);
   readonly licenses = new Licenses(this);
+  readonly portal = new Portal(this);
 
   readonly validateLicense = this.licenses.validate;
 
