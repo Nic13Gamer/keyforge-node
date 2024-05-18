@@ -1,8 +1,8 @@
 import { version } from '../package.json';
+import { KeyforgeError } from './error';
 import { Licenses } from './licenses/licenses';
 import { Products } from './products/products';
 import {
-  ErrorResponse,
   GetOptions,
   KEYFORGE_ERROR_CODES_BY_KEY,
   PatchOptions,
@@ -49,18 +49,12 @@ export class Keyforge {
     });
   }
 
-  async fetchRequest<T>(
-    path: string,
-    options = {}
-  ): Promise<{
-    data: T | null;
-    error: ErrorResponse | null;
-  }> {
+  async fetchRequest<T>(path: string, options = {}): Promise<T | null> {
     const response = await fetch(`${baseUrl}${path}`, options);
 
     if (!response.ok) {
-      let error: ErrorResponse = {
-        message: response.statusText,
+      let error: KeyforgeError = {
+        message: await response.text(),
         status: response.status,
         name: KEYFORGE_ERROR_CODES_BY_KEY[
           response.status as keyof typeof KEYFORGE_ERROR_CODES_BY_KEY
@@ -70,8 +64,10 @@ export class Keyforge {
       try {
         const body = await response.json();
 
+        const message = body.message || body.error.issues || body.error.message;
+
         error = {
-          message: body.message,
+          message,
           status: response.status,
           name: KEYFORGE_ERROR_CODES_BY_KEY[
             response.status as keyof typeof KEYFORGE_ERROR_CODES_BY_KEY
@@ -96,7 +92,7 @@ export class Keyforge {
       ...options,
     };
 
-    return (await this.fetchRequest<T>(path, requestOptions)).data;
+    return await this.fetchRequest<T>(path, requestOptions);
   }
 
   async get<T>(path: string, options: GetOptions = {}) {
@@ -106,7 +102,7 @@ export class Keyforge {
       ...options,
     };
 
-    return (await this.fetchRequest<T>(path, requestOptions)).data;
+    return await this.fetchRequest<T>(path, requestOptions);
   }
 
   async put<T>(path: string, payload: any, options: PutOptions = {}) {
@@ -117,7 +113,7 @@ export class Keyforge {
       ...options,
     };
 
-    return (await this.fetchRequest<T>(path, requestOptions)).data;
+    return await this.fetchRequest<T>(path, requestOptions);
   }
 
   async patch<T>(path: string, payload: any, options: PatchOptions = {}) {
@@ -128,7 +124,7 @@ export class Keyforge {
       ...options,
     };
 
-    return (await this.fetchRequest<T>(path, requestOptions)).data;
+    return await this.fetchRequest<T>(path, requestOptions);
   }
 
   async delete<T>(path: string, query?: unknown) {
@@ -138,6 +134,6 @@ export class Keyforge {
       body: JSON.stringify(query),
     };
 
-    return (await this.fetchRequest<T>(path, requestOptions)).data;
+    return await this.fetchRequest<T>(path, requestOptions);
   }
 }

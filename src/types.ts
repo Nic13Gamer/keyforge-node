@@ -10,12 +10,6 @@ export const KEYFORGE_ERROR_CODES_BY_KEY = {
 
 export type KEYFORGE_ERROR_CODE_KEY = keyof typeof KEYFORGE_ERROR_CODES_BY_KEY;
 
-export type ErrorResponse = {
-  message: string;
-  status: number;
-  name?: string;
-};
-
 export type GetOptions = {
   query?: { [key: string]: any };
 };

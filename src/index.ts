@@ -1,2 +1,2 @@
+export { KeyforgeError } from './error';
 export { Keyforge } from './keyforge';
-export { ErrorResponse } from './types';
