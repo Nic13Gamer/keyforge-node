@@ -1,4 +1,5 @@
 import { version } from '../package.json';
+import { Products } from './products/products';
 import {
   ErrorResponse,
   GetOptions,
@@ -21,6 +22,8 @@ const userAgent =
 
 export class Keyforge {
   private readonly headers: Headers;
+
+  readonly products = new Products(this);
 
   constructor(readonly apiKey?: string) {
     if (!apiKey) {
@@ -71,9 +74,9 @@ export class Keyforge {
           ],
         };
 
-        return { data: null, error };
+        throw error;
       } catch (err) {
-        return { data: null, error };
+        throw error;
       }
     }
 
@@ -89,7 +92,7 @@ export class Keyforge {
       ...options,
     };
 
-    return this.fetchRequest<T>(path, requestOptions);
+    return (await this.fetchRequest<T>(path, requestOptions)).data;
   }
 
   async get<T>(path: string, options: GetOptions = {}) {
@@ -99,7 +102,7 @@ export class Keyforge {
       ...options,
     };
 
-    return this.fetchRequest<T>(path, requestOptions);
+    return (await this.fetchRequest<T>(path, requestOptions)).data;
   }
 
   async put<T>(path: string, payload: any, options: PutOptions = {}) {
@@ -110,7 +113,7 @@ export class Keyforge {
       ...options,
     };
 
-    return this.fetchRequest<T>(path, requestOptions);
+    return (await this.fetchRequest<T>(path, requestOptions)).data;
   }
 
   async patch<T>(path: string, payload: any, options: PatchOptions = {}) {
@@ -121,7 +124,7 @@ export class Keyforge {
       ...options,
     };
 
-    return this.fetchRequest<T>(path, requestOptions);
+    return (await this.fetchRequest<T>(path, requestOptions)).data;
   }
 
   async delete<T>(path: string, query?: unknown) {
@@ -131,6 +134,6 @@ export class Keyforge {
       body: JSON.stringify(query),
     };
 
-    return this.fetchRequest<T>(path, requestOptions);
+    return (await this.fetchRequest<T>(path, requestOptions)).data;
   }
 }
