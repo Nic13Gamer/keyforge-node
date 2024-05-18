@@ -54,6 +54,12 @@ export class Licenses {
     return data;
   }
 
+  /**
+   * Check if a license is valid. You can also check if a license is valid for a specific device.
+   *
+   * @param key The license key.
+   * @param params If you want to check if the license is valid for a specific device, pass the `deviceIdentifier` here.
+   */
   async validate(
     key: string,
     params?: ValidateLicenseParams
