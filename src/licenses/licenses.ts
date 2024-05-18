@@ -1,8 +1,10 @@
 import { Keyforge } from '../keyforge';
+import { getLicenseStatus } from '../utils';
 import {
   ActivateLicenseDevice,
   CreateLicense,
   License,
+  LicenseStatus,
   UpdateLicense,
 } from './types';
 
@@ -48,5 +50,25 @@ export class Licenses {
       device
     );
     return data;
+  }
+
+  async validate(key: string): Promise<{
+    isValid: boolean;
+    status: LicenseStatus;
+    license: License;
+  } | null> {
+    const license = await this.get(key);
+
+    if (!license) {
+      return null;
+    }
+
+    const status = getLicenseStatus(license);
+
+    return {
+      isValid: status === 'active',
+      status,
+      license,
+    };
   }
 }

@@ -27,6 +27,8 @@ export class Keyforge {
   readonly products = new Products(this);
   readonly licenses = new Licenses(this);
 
+  readonly validateLicense = this.licenses.validate;
+
   constructor(readonly apiKey?: string) {
     if (!apiKey) {
       if (typeof process !== 'undefined' && process.env) {

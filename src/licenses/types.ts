@@ -1,3 +1,5 @@
+export type LicenseStatus = 'active' | 'expired' | 'revoked';
+
 export type ActiveDevice = {
   identifier: string;
   name: string;
