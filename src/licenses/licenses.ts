@@ -2,10 +2,12 @@ import { Keyforge } from '../keyforge';
 import { getLicenseStatus } from '../utils';
 import {
   ActivateLicenseDevice,
+  ActiveDevice,
   CreateLicense,
   License,
   LicenseStatus,
   UpdateLicense,
+  ValidateLicenseParams,
 } from './types';
 
 export class Licenses {
@@ -52,9 +54,13 @@ export class Licenses {
     return data;
   }
 
-  async validate(key: string): Promise<{
+  async validate(
+    key: string,
+    params?: ValidateLicenseParams
+  ): Promise<{
     isValid: boolean;
     status: LicenseStatus;
+    device: ActiveDevice | null;
     license: License;
   } | null> {
     const license = await this.get(key);
@@ -64,10 +70,34 @@ export class Licenses {
     }
 
     const status = getLicenseStatus(license);
+    const isValid = status === 'active';
+
+    if (status === 'active' && params?.deviceIdentifier) {
+      const device = license.activeDevices.find(
+        (device) => device.identifier === params.deviceIdentifier
+      );
+
+      if (!device) {
+        return {
+          isValid: false,
+          status,
+          device: null,
+          license,
+        };
+      }
+
+      return {
+        isValid: true,
+        status,
+        device,
+        license,
+      };
+    }
 
     return {
-      isValid: status === 'active',
+      isValid,
       status,
+      device: null,
       license,
     };
   }

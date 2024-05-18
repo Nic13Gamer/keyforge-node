@@ -39,3 +39,7 @@ export type ActivateLicenseDevice = {
   identifier: string;
   name: string;
 };
+
+export type ValidateLicenseParams = {
+  deviceIdentifier?: string;
+};
