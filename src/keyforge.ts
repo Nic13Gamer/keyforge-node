@@ -2,6 +2,7 @@ import { version } from '../package.json';
 import {
   ErrorResponse,
   GetOptions,
+  KEYFORGE_ERROR_CODES_BY_KEY,
   PatchOptions,
   PostOptions,
   PutOptions,
@@ -53,24 +54,31 @@ export class Keyforge {
     if (!response.ok) {
       let error: ErrorResponse = {
         message: response.statusText,
-        name: 'application_error',
+        status: response.status,
+        name: KEYFORGE_ERROR_CODES_BY_KEY[
+          response.status as keyof typeof KEYFORGE_ERROR_CODES_BY_KEY
+        ],
       };
 
       try {
-        error = await response.json();
+        const body = await response.json();
+
+        error = {
+          message: body.message,
+          status: response.status,
+          name: KEYFORGE_ERROR_CODES_BY_KEY[
+            response.status as keyof typeof KEYFORGE_ERROR_CODES_BY_KEY
+          ],
+        };
 
         return { data: null, error };
       } catch (err) {
-        if (err instanceof Error) {
-          return { data: null, error: { ...error, message: err.message } };
-        }
-
         return { data: null, error };
       }
     }
 
     const data = await response.json();
-    return { data, error: null };
+    return data;
   }
 
   async post<T>(path: string, payload?: unknown, options: PostOptions = {}) {
