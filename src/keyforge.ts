@@ -78,9 +78,9 @@ export class Keyforge {
           ],
         };
 
-        throw error;
+        throw new KeyforgeError(error.message, error.name, error.status);
       } catch (err) {
-        throw error;
+        throw new KeyforgeError(error.message, error.name, error.status);
       }
     }
 
