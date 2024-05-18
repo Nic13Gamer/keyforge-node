@@ -82,8 +82,8 @@ export class Keyforge {
       }
     }
 
-    const data = await response.json();
-    return data;
+    const payload = await response.json();
+    return payload.data || null;
   }
 
   async post<T>(path: string, payload?: unknown, options: PostOptions = {}) {
