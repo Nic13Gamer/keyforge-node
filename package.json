@@ -5,6 +5,9 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist/**"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "release": "pnpm run build && changeset publish",
@@ -13,10 +16,12 @@
   "publishConfig": {
     "access": "public"
   },
+  "packageManager": "pnpm@9.0.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Nic13Gamer/keyforge-node.git"
   },
+  "homepage": "https://keyforge.dev",
   "author": "Keyforge",
   "license": "MIT",
   "devDependencies": {
