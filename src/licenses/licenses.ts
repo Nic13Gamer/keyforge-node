@@ -26,4 +26,11 @@ export class Licenses {
     await this.keyforge.delete(`/v1/licenses/${key}`);
     return;
   }
+
+  async resetDevices(key: string): Promise<License | null> {
+    const data = await this.keyforge.post<License>(
+      `/v1/licenses/${key}/reset-devices`
+    );
+    return data;
+  }
 }
