@@ -1,4 +1,5 @@
 import { version } from '../package.json';
+import { Licenses } from './licenses/licenses';
 import { Products } from './products/products';
 import {
   ErrorResponse,
@@ -24,6 +25,7 @@ export class Keyforge {
   private readonly headers: Headers;
 
   readonly products = new Products(this);
+  readonly licenses = new Licenses(this);
 
   constructor(readonly apiKey?: string) {
     if (!apiKey) {
