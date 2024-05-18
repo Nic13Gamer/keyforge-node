@@ -32,3 +32,8 @@ export type UpdateLicense = {
   expiresAt?: Date;
   revoked?: boolean;
 };
+
+export type ActivateLicenseDevice = {
+  identifier: string;
+  name: string;
+};

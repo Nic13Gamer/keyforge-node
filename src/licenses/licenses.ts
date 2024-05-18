@@ -1,5 +1,5 @@
 import { Keyforge } from '../keyforge';
-import { CreateLicense, License, UpdateLicense } from './types';
+import { ActivateLicenseDevice, CreateLicense, License, UpdateLicense } from './types';
 
 export class Licenses {
   constructor(private readonly keyforge: Keyforge) {}
@@ -30,6 +30,14 @@ export class Licenses {
   async resetDevices(key: string): Promise<License | null> {
     const data = await this.keyforge.post<License>(
       `/v1/licenses/${key}/reset-devices`
+    );
+    return data;
+  }
+
+  async activate(key:string, device: ActivateLicenseDevice): Promise<License | null> {
+    const data = await this.keyforge.post<License>(
+      `/v1/licenses/${key}/activate`,
+      device
     );
     return data;
   }
