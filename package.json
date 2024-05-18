@@ -10,6 +10,9 @@
     "release": "pnpm run build && changeset publish",
     "lint": "tsc"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Nic13Gamer/keyforge-node.git"
