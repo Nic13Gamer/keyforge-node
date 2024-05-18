@@ -54,6 +54,16 @@ export class Licenses {
     return data;
   }
 
+  async revoke(key: string): Promise<License | null> {
+    const data = await this.update(key, { revoked: true });
+    return data;
+  }
+
+  async unrevoke(key: string): Promise<License | null> {
+    const data = await this.update(key, { revoked: false });
+    return data;
+  }
+
   /**
    * Check if a license is valid. You can also check if a license is valid for a specific device.
    *
