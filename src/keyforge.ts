@@ -11,7 +11,7 @@ import {
 } from './types';
 
 const defaultBaseUrl = 'https://keyforge.dev/api';
-const defaultUserAgent = `resend-node:${version}`;
+const defaultUserAgent = `keyforge-node:${version}`;
 const baseUrl =
   typeof process !== 'undefined' && process.env
     ? process.env.KEYFORGE_BASE_URL || defaultBaseUrl
