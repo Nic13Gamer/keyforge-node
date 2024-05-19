@@ -51,7 +51,7 @@ export class Keyforge {
     });
   }
 
-  async fetchRequest<T>(path: string, options = {}): Promise<T | null> {
+  async fetchRequest<T>(path: string, options = {}): Promise<T> {
     const response = await fetch(`${baseUrl}${path}`, options);
 
     if (!response.ok) {
@@ -85,7 +85,7 @@ export class Keyforge {
     }
 
     const payload = await response.json();
-    return payload.data || null;
+    return payload.data;
   }
 
   async post<T>(path: string, payload?: unknown, options: PostOptions = {}) {

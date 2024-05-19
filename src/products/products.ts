@@ -4,22 +4,22 @@ import { CreateProduct, Product, UpdateProduct } from './types';
 export class Products {
   constructor(private readonly keyforge: Keyforge) {}
 
-  async list(): Promise<Product[] | null> {
+  async list(): Promise<Product[]> {
     const data = await this.keyforge.get<Product[]>('/v1/products');
     return data;
   }
 
-  async get(id: string): Promise<Product | null> {
+  async get(id: string): Promise<Product> {
     const data = await this.keyforge.get<Product>(`/v1/products/${id}`);
     return data;
   }
 
-  async create(params: CreateProduct): Promise<Product | null> {
+  async create(params: CreateProduct): Promise<Product> {
     const data = await this.keyforge.post<Product>('/v1/products', params);
     return data;
   }
 
-  async update(id: string, params: UpdateProduct): Promise<Product | null> {
+  async update(id: string, params: UpdateProduct): Promise<Product> {
     const data = await this.keyforge.patch<Product>(
       `/v1/products/${id}`,
       params

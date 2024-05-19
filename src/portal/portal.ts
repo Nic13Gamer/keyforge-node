@@ -8,7 +8,7 @@ export class Portal {
   async updateProduct(
     id: string,
     params: UpdatePortalProduct
-  ): Promise<Product | null> {
+  ): Promise<Product> {
     const data = await this.keyforge.products.update(id, {
       portalShow: params.show,
       portalAllowDeviceReset: params.allowDeviceReset,

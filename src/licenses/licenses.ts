@@ -13,17 +13,17 @@ import {
 export class Licenses {
   constructor(private readonly keyforge: Keyforge) {}
 
-  async get(key: string): Promise<License | null> {
+  async get(key: string): Promise<License> {
     const data = await this.keyforge.get<License>(`/v1/licenses/${key}`);
     return data;
   }
 
-  async create(params: CreateLicense): Promise<License | null> {
+  async create(params: CreateLicense): Promise<License> {
     const data = await this.keyforge.post<License>('/v1/licenses', params);
     return data;
   }
 
-  async update(key: string, params: UpdateLicense): Promise<License | null> {
+  async update(key: string, params: UpdateLicense): Promise<License> {
     const data = await this.keyforge.patch<License>(
       `/v1/licenses/${key}`,
       params
@@ -36,7 +36,7 @@ export class Licenses {
     return;
   }
 
-  async resetDevices(key: string): Promise<License | null> {
+  async resetDevices(key: string): Promise<License> {
     const data = await this.keyforge.post<License>(
       `/v1/licenses/${key}/reset-devices`
     );
@@ -46,7 +46,7 @@ export class Licenses {
   async activate(
     key: string,
     device: ActivateLicenseDevice
-  ): Promise<License | null> {
+  ): Promise<License> {
     const data = await this.keyforge.post<License>(
       `/v1/licenses/${key}/activate`,
       device
@@ -54,12 +54,12 @@ export class Licenses {
     return data;
   }
 
-  async revoke(key: string): Promise<License | null> {
+  async revoke(key: string): Promise<License> {
     const data = await this.update(key, { revoked: true });
     return data;
   }
 
-  async unrevoke(key: string): Promise<License | null> {
+  async unrevoke(key: string): Promise<License> {
     const data = await this.update(key, { revoked: false });
     return data;
   }
@@ -78,12 +78,8 @@ export class Licenses {
     status: LicenseStatus;
     device: ActiveDevice | null;
     license: License;
-  } | null> {
+  }> {
     const license = await this.get(key);
-
-    if (!license) {
-      return null;
-    }
 
     const status = getLicenseStatus(license);
     const isValid = status === 'active';
