@@ -42,4 +42,5 @@ export type ActivateLicenseDevice = {
 
 export type ValidateLicenseParams = {
   deviceIdentifier?: string;
+  productId?: string;
 };

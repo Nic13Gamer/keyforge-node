@@ -43,10 +43,7 @@ export class Licenses {
     return data;
   }
 
-  async activate(
-    key: string,
-    device: ActivateLicenseDevice
-  ): Promise<License> {
+  async activate(key: string, device: ActivateLicenseDevice): Promise<License> {
     const data = await this.keyforge.post<License>(
       `/v1/licenses/${key}/activate`,
       device
@@ -65,10 +62,10 @@ export class Licenses {
   }
 
   /**
-   * Check if a license is valid. You can also check if a license is valid for a specific device.
+   * Check if a license is valid. You can also check if a license is valid for a specific device or product.
    *
    * @param key The license key.
-   * @param params If you want to check if the license is valid for a specific device, pass the `deviceIdentifier` here.
+   * @param params If you want to check if the license is valid for a specific device, pass the `deviceIdentifier` here. If you want to check if the license is valid for a specific product, pass the `productId` here.
    */
   async validate(
     key: string,
@@ -83,6 +80,15 @@ export class Licenses {
 
     const status = getLicenseStatus(license);
     const isValid = status === 'active';
+
+    if (params?.productId && license.productId !== params.productId) {
+      return {
+        isValid: false,
+        status,
+        device: null,
+        license,
+      };
+    }
 
     if (status === 'active' && params?.deviceIdentifier) {
       const device = license.activeDevices.find(
