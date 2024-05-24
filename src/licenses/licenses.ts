@@ -2,9 +2,9 @@ import { Keyforge } from '../keyforge';
 import { getLicenseStatus } from '../utils';
 import {
   ActivateLicenseDevice,
-  ActiveDevice,
   CreateLicense,
   License,
+  LicenseDevice,
   LicenseStatus,
   UpdateLicense,
   ValidateLicenseParams,
@@ -73,7 +73,7 @@ export class Licenses {
   ): Promise<{
     isValid: boolean;
     status: LicenseStatus;
-    device: ActiveDevice | null;
+    device: LicenseDevice | null;
     license: License;
   }> {
     const license = await this.get(key);

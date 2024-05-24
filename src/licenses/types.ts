@@ -1,6 +1,8 @@
 export type LicenseStatus = 'active' | 'expired' | 'revoked';
 
-export type ActiveDevice = {
+export type LicenseType = 'perpetual' | 'timed';
+
+export type LicenseDevice = {
   identifier: string;
   name: string;
   activationDate: string;
@@ -10,25 +12,25 @@ export type License = {
   userId: string;
   productId: string;
   key: string;
-  type: 'perpetual' | 'timed';
+  type: LicenseType;
   expiresAt: string | null;
   revoked: boolean;
   maxDevices: number;
-  activeDevices: ActiveDevice[];
+  activeDevices: LicenseDevice[];
   email: string | null;
   createdAt: string;
 };
 
 export type CreateLicense = {
   productId: string;
-  type: 'perpetual' | 'timed';
+  type: LicenseType;
   maxDevices: number;
   email?: string;
   expiresAt?: Date;
 };
 
 export type UpdateLicense = {
-  type?: 'perpetual' | 'timed';
+  type?: LicenseType;
   maxDevices?: number;
   email?: string;
   expiresAt?: Date;
