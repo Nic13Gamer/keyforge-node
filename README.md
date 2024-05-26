@@ -26,9 +26,7 @@ const keyforge = new Keyforge('sk_1234');
 
 ## Usage
 
-### Validate a license
-
-TODO...
+To get started using the SDK, follow the quickstart guide [here](https://docs.keyforge.dev).
 
 ## License
 
