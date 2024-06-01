@@ -1,13 +1,13 @@
+import { KeyforgeError } from '../error';
 import { Keyforge } from '../keyforge';
 import { getLicenseStatus } from '../utils';
 import {
   ActivateLicenseDevice,
   CreateLicense,
   License,
-  LicenseDevice,
-  LicenseStatus,
   UpdateLicense,
   ValidateLicenseParams,
+  ValidateLicenseResult,
 } from './types';
 
 export class Licenses {
@@ -70,13 +70,23 @@ export class Licenses {
   async validate(
     key: string,
     params?: ValidateLicenseParams
-  ): Promise<{
-    isValid: boolean;
-    status: LicenseStatus;
-    device: LicenseDevice | null;
-    license: License;
-  }> {
-    const license = await this.get(key);
+  ): Promise<ValidateLicenseResult> {
+    let license: License;
+
+    try {
+      license = await this.get(key);
+    } catch (error) {
+      if (error instanceof KeyforgeError && error.name === 'not_found') {
+        return {
+          isValid: false,
+          status: null,
+          device: null,
+          license: null,
+        };
+      }
+
+      throw error;
+    }
 
     const status = getLicenseStatus(license);
     const isValid = status === 'active';

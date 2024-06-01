@@ -46,3 +46,21 @@ export type ValidateLicenseParams = {
   deviceIdentifier?: string;
   productId?: string;
 };
+
+type ValidateLicenseNotFoundResult = {
+  isValid: false;
+  status: null;
+  device: null;
+  license: null;
+};
+
+type ValidateLicenseSuccessResult = {
+  isValid: boolean;
+  status: LicenseStatus;
+  device: LicenseDevice | null;
+  license: License;
+};
+
+export type ValidateLicenseResult =
+  | ValidateLicenseNotFoundResult
+  | ValidateLicenseSuccessResult;
