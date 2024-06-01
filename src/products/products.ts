@@ -1,5 +1,5 @@
 import { Keyforge } from '../keyforge';
-import { CreateProduct, Product, UpdateProduct } from './types';
+import { CreateProductParams, Product, UpdateProductParams } from './types';
 
 export class Products {
   constructor(private readonly keyforge: Keyforge) {}
@@ -14,12 +14,12 @@ export class Products {
     return data;
   }
 
-  async create(params: CreateProduct): Promise<Product> {
+  async create(params: CreateProductParams): Promise<Product> {
     const data = await this.keyforge.post<Product>('/v1/products', params);
     return data;
   }
 
-  async update(id: string, params: UpdateProduct): Promise<Product> {
+  async update(id: string, params: UpdateProductParams): Promise<Product> {
     const data = await this.keyforge.patch<Product>(
       `/v1/products/${id}`,
       params

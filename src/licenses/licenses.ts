@@ -3,9 +3,9 @@ import { Keyforge } from '../keyforge';
 import { getLicenseStatus } from '../utils';
 import {
   ActivateLicenseDevice,
-  CreateLicense,
+  CreateLicenseParams,
   License,
-  UpdateLicense,
+  UpdateLicenseParams,
   ValidateLicenseParams,
   ValidateLicenseResult,
 } from './types';
@@ -18,12 +18,12 @@ export class Licenses {
     return data;
   }
 
-  async create(params: CreateLicense): Promise<License> {
+  async create(params: CreateLicenseParams): Promise<License> {
     const data = await this.keyforge.post<License>('/v1/licenses', params);
     return data;
   }
 
-  async update(key: string, params: UpdateLicense): Promise<License> {
+  async update(key: string, params: UpdateLicenseParams): Promise<License> {
     const data = await this.keyforge.patch<License>(
       `/v1/licenses/${key}`,
       params

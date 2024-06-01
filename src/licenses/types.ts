@@ -21,7 +21,7 @@ export type License = {
   createdAt: string;
 };
 
-export type CreateLicense = {
+export type CreateLicenseParams = {
   productId: string;
   type: LicenseType;
   maxDevices: number;
@@ -29,7 +29,7 @@ export type CreateLicense = {
   expiresAt?: Date;
 };
 
-export type UpdateLicense = {
+export type UpdateLicenseParams = {
   type?: LicenseType;
   maxDevices?: number;
   email?: string;

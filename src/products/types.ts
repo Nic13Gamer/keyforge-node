@@ -9,13 +9,13 @@ export type Product = {
   portalAllowDeviceReset: boolean;
 };
 
-export type CreateProduct = {
+export type CreateProductParams = {
   name: string;
   description?: string;
   supportEmail?: string;
 };
 
-export type UpdateProduct = {
+export type UpdateProductParams = {
   name?: string;
   description?: string;
   supportEmail?: string;
