@@ -1,5 +1,11 @@
 # keyforge-js
 
+## 0.2.1
+
+### Patch Changes
+
+- 59507f4: Server-side license validation
+
 ## 0.2.0
 
 ### Minor Changes
