@@ -1,6 +1,5 @@
 import { KeyforgeError } from '../error';
 import { Keyforge } from '../keyforge';
-import { getLicenseStatus } from '../utils';
 import {
   ActivateLicenseDevice,
   CreateLicenseParams,
@@ -71,10 +70,13 @@ export class Licenses {
     key: string,
     params?: ValidateLicenseParams
   ): Promise<ValidateLicenseResult> {
-    let license: License;
+    let validation: ValidateLicenseResult;
 
     try {
-      license = await this.get(key);
+      validation = await this.keyforge.post<ValidateLicenseResult>(
+        `/v1/licenses/${key}/validate`,
+        params
+      );
     } catch (error) {
       if (error instanceof KeyforgeError && error.name === 'not_found') {
         return {
@@ -88,45 +90,6 @@ export class Licenses {
       throw error;
     }
 
-    const status = getLicenseStatus(license);
-    const isValid = status === 'active';
-
-    if (params?.productId && license.productId !== params.productId) {
-      return {
-        isValid: false,
-        status,
-        device: null,
-        license,
-      };
-    }
-
-    if (status === 'active' && params?.deviceIdentifier) {
-      const device = license.activeDevices.find(
-        (device) => device.identifier === params.deviceIdentifier
-      );
-
-      if (!device) {
-        return {
-          isValid: false,
-          status,
-          device: null,
-          license,
-        };
-      }
-
-      return {
-        isValid: true,
-        status,
-        device,
-        license,
-      };
-    }
-
-    return {
-      isValid,
-      status,
-      device: null,
-      license,
-    };
+    return validation;
   }
 }
