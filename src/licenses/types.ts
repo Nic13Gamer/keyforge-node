@@ -37,9 +37,12 @@ export type UpdateLicenseParams = {
   revoked?: boolean;
 };
 
-export type ActivateLicenseDevice = {
-  identifier: string;
-  name: string;
+export type ActivateLicenseParams = {
+  productId: string;
+  device: {
+    identifier: string;
+    name: string;
+  };
 };
 
 export type ValidateLicenseParams = {

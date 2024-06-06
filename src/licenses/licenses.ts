@@ -1,7 +1,7 @@
 import { KeyforgeError } from '../error';
 import { Keyforge } from '../keyforge';
 import {
-  ActivateLicenseDevice,
+  ActivateLicenseParams,
   CreateLicenseParams,
   License,
   UpdateLicenseParams,
@@ -42,10 +42,10 @@ export class Licenses {
     return data;
   }
 
-  async activate(key: string, device: ActivateLicenseDevice): Promise<License> {
+  async activate(key: string, params: ActivateLicenseParams): Promise<License> {
     const data = await this.keyforge.post<License>(
       `/v1/licenses/${key}/activate`,
-      device
+      params
     );
     return data;
   }
