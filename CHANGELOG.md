@@ -1,5 +1,11 @@
 # keyforge-js
 
+## 0.3.0
+
+### Minor Changes
+
+- ddb5e66: Activate license improvements
+
 ## 0.2.1
 
 ### Patch Changes
