@@ -1,5 +1,11 @@
 # keyforge-js
 
+## 0.4.0
+
+### Minor Changes
+
+- 1b4df4a: add JSDocs to all functions
+
 ## 0.3.0
 
 ### Minor Changes
