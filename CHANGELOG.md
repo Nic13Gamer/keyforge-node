@@ -1,5 +1,15 @@
 # keyforge-js
 
+## 1.0.0
+
+### Major Changes
+
+- a5f506b: 1.0 release
+
+### Minor Changes
+
+- a5f506b: Create private portal sessions
+
 ## 0.4.0
 
 ### Minor Changes
