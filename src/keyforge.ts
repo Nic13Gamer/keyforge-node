@@ -82,6 +82,10 @@ export class Keyforge {
       }
     }
 
+    if (response.headers.get('content-length') === '0') {
+      return {} as T;
+    }
+
     const data = await response.json();
     return data;
   }
