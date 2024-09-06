@@ -1,5 +1,11 @@
 # keyforge-js
 
+## 1.0.1
+
+### Patch Changes
+
+- b8795ac: Handle empty responses
+
 ## 1.0.0
 
 ### Major Changes
