@@ -1,6 +1,6 @@
 {
   "name": "keyforge-js",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Node.js library for interacting with the Keyforge API",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

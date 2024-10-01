@@ -1,5 +1,11 @@
 # keyforge-js
 
+## 1.1.0
+
+### Minor Changes
+
+- a3a9704: Remove device
+
 ## 1.0.1
 
 ### Patch Changes
