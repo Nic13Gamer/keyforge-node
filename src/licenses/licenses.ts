@@ -60,7 +60,7 @@ export class Licenses {
   }
 
   /**
-   * Reset the active devices of a license.
+   * Reset all the active devices of a license.
    *
    * @param key The license key.
    * @returns The license with the updated active devices.
@@ -68,6 +68,20 @@ export class Licenses {
   async resetDevices(key: string): Promise<License> {
     const data = await this.keyforge.post<License>(
       `/v1/licenses/${key}/reset-devices`
+    );
+    return data;
+  }
+
+  /**
+   * Remove a single device from a license.
+   *
+   * @param key The license key.
+   * @param deviceIdentifier The device identifier.
+   * @returns The license with the updated active devices.
+   */
+  async removeDevice(key: string, deviceIdentifier: string): Promise<License> {
+    const data = await this.keyforge.post<License>(
+      `/v1/licenses/${key}/devices/${deviceIdentifier}/reset`
     );
     return data;
   }
