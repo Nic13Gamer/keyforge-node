@@ -1,5 +1,11 @@
 # keyforge-js
 
+## 1.1.1
+
+### Patch Changes
+
+- 68fcb6b: Update device reset APIs
+
 ## 1.1.0
 
 ### Minor Changes
