@@ -67,7 +67,7 @@ export class Licenses {
    */
   async resetDevices(key: string): Promise<License> {
     const data = await this.keyforge.post<License>(
-      `/v1/licenses/${key}/reset-devices`
+      `/v1/licenses/${key}/devices/reset`
     );
     return data;
   }
@@ -81,7 +81,7 @@ export class Licenses {
    */
   async removeDevice(key: string, deviceIdentifier: string): Promise<License> {
     const data = await this.keyforge.post<License>(
-      `/v1/licenses/${key}/devices/${deviceIdentifier}/reset`
+      `/v1/licenses/${key}/devices/${deviceIdentifier}/remove`
     );
     return data;
   }
