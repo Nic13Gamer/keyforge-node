@@ -1,5 +1,11 @@
 # keyforge-js
 
+## 1.1.2
+
+### Patch Changes
+
+- a76c2e4: Fix empty request body
+
 ## 1.1.1
 
 ### Patch Changes
