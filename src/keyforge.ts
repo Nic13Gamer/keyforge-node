@@ -94,7 +94,7 @@ export class Keyforge {
     const requestOptions = {
       method: 'POST',
       headers: this.headers,
-      body: JSON.stringify(payload),
+      body: JSON.stringify(payload ?? {}),
       ...options,
     };
 
@@ -115,7 +115,7 @@ export class Keyforge {
     const requestOptions = {
       method: 'PUT',
       headers: this.headers,
-      body: JSON.stringify(payload),
+      body: JSON.stringify(payload ?? {}),
       ...options,
     };
 
@@ -126,7 +126,7 @@ export class Keyforge {
     const requestOptions = {
       method: 'PATCH',
       headers: this.headers,
-      body: JSON.stringify(payload),
+      body: JSON.stringify(payload ?? {}),
       ...options,
     };
 
