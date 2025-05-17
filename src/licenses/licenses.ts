@@ -19,7 +19,11 @@ export class Licenses {
    * @returns The license.
    */
   async get(key: string): Promise<License> {
-    const data = await this.keyforge.get<License>(`/v1/licenses/${key}`);
+    const data = await this.keyforge.get<License>('/v1/licenses', {
+      headers: {
+        'License-Key': key,
+      },
+    });
     return data;
   }
 
@@ -42,10 +46,11 @@ export class Licenses {
    * @returns The updated license.
    */
   async update(key: string, params: UpdateLicenseParams): Promise<License> {
-    const data = await this.keyforge.patch<License>(
-      `/v1/licenses/${key}`,
-      params
-    );
+    const data = await this.keyforge.patch<License>('/v1/licenses', params, {
+      headers: {
+        'License-Key': key,
+      },
+    });
     return data;
   }
 
@@ -55,7 +60,11 @@ export class Licenses {
    * @param key The license key.
    */
   async delete(key: string): Promise<void> {
-    await this.keyforge.delete(`/v1/licenses/${key}`);
+    await this.keyforge.delete('/v1/licenses', {
+      headers: {
+        'License-Key': key,
+      },
+    });
     return;
   }
 
@@ -67,7 +76,13 @@ export class Licenses {
    */
   async resetDevices(key: string): Promise<License> {
     const data = await this.keyforge.post<License>(
-      `/v1/licenses/${key}/devices/reset`
+      '/v1/licenses/devices/reset',
+      null,
+      {
+        headers: {
+          'License-Key': key,
+        },
+      }
     );
     return data;
   }
@@ -81,7 +96,13 @@ export class Licenses {
    */
   async removeDevice(key: string, deviceIdentifier: string): Promise<License> {
     const data = await this.keyforge.post<License>(
-      `/v1/licenses/${key}/devices/${deviceIdentifier}/remove`
+      `/v1/licenses/devices/${deviceIdentifier}/remove`,
+      null,
+      {
+        headers: {
+          'License-Key': key,
+        },
+      }
     );
     return data;
   }
@@ -95,8 +116,13 @@ export class Licenses {
    */
   async activate(key: string, params: ActivateLicenseParams): Promise<License> {
     const data = await this.keyforge.post<License>(
-      `/v1/licenses/${key}/activate`,
-      params
+      '/v1/licenses/activate',
+      params,
+      {
+        headers: {
+          'License-Key': key,
+        },
+      }
     );
     return data;
   }
@@ -152,8 +178,13 @@ export class Licenses {
 
     try {
       validation = await this.keyforge.post<ValidateLicenseResult>(
-        `/v1/licenses/${key}/validate`,
-        params
+        '/v1/licenses/validate',
+        params,
+        {
+          headers: {
+            'License-Key': key,
+          },
+        }
       );
     } catch (error) {
       if (error instanceof KeyforgeError && error.name === 'not_found') {

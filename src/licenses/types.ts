@@ -32,7 +32,7 @@ export type CreateLicenseParams = {
 export type UpdateLicenseParams = {
   type?: LicenseType;
   maxDevices?: number;
-  email?: string;
+  email?: string | null;
   expiresAt?: Date;
   revoked?: boolean;
 };

@@ -4,12 +4,14 @@ import { Licenses } from './licenses/licenses';
 import { Portal } from './portal/portal';
 import { Products } from './products/products';
 import {
+  DeleteOptions,
   GetOptions,
   KEYFORGE_ERROR_CODES_BY_KEY,
   PatchOptions,
   PostOptions,
   PutOptions,
 } from './types';
+import { mergeHeaders } from './utils';
 
 const defaultBaseUrl = 'https://keyforge.dev/api';
 const defaultUserAgent = `keyforge-node:${version}`;
@@ -66,7 +68,7 @@ export class Keyforge {
       try {
         const body = JSON.parse(bodyText);
 
-        const message = body.message || body.error.issues || body.error.message;
+        const message = body.message || body.error.message;
 
         error = {
           message,
@@ -86,16 +88,19 @@ export class Keyforge {
       return {} as T;
     }
 
-    const data = await response.json();
-    return data;
+    try {
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return {} as T;
+    }
   }
 
   async post<T>(path: string, payload?: unknown, options: PostOptions = {}) {
     const requestOptions = {
       method: 'POST',
-      headers: this.headers,
+      headers: mergeHeaders(this.headers, options.headers),
       body: JSON.stringify(payload ?? {}),
-      ...options,
     };
 
     return await this.fetchRequest<T>(path, requestOptions);
@@ -104,8 +109,7 @@ export class Keyforge {
   async get<T>(path: string, options: GetOptions = {}) {
     const requestOptions = {
       method: 'GET',
-      headers: this.headers,
-      ...options,
+      headers: mergeHeaders(this.headers, options.headers),
     };
 
     return await this.fetchRequest<T>(path, requestOptions);
@@ -114,9 +118,8 @@ export class Keyforge {
   async put<T>(path: string, payload: any, options: PutOptions = {}) {
     const requestOptions = {
       method: 'PUT',
-      headers: this.headers,
+      headers: mergeHeaders(this.headers, options.headers),
       body: JSON.stringify(payload ?? {}),
-      ...options,
     };
 
     return await this.fetchRequest<T>(path, requestOptions);
@@ -125,19 +128,17 @@ export class Keyforge {
   async patch<T>(path: string, payload: any, options: PatchOptions = {}) {
     const requestOptions = {
       method: 'PATCH',
-      headers: this.headers,
+      headers: mergeHeaders(this.headers, options.headers),
       body: JSON.stringify(payload ?? {}),
-      ...options,
     };
 
     return await this.fetchRequest<T>(path, requestOptions);
   }
 
-  async delete<T>(path: string, query?: unknown) {
+  async delete<T>(path: string, options: DeleteOptions = {}) {
     const requestOptions = {
       method: 'DELETE',
-      headers: this.headers,
-      body: JSON.stringify(query),
+      headers: mergeHeaders(this.headers, options.headers),
     };
 
     return await this.fetchRequest<T>(path, requestOptions);

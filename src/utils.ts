@@ -1,17 +1,10 @@
-import type { License, LicenseStatus } from './licenses/types';
+export function mergeHeaders(...sources: (HeadersInit | undefined)[]) {
+  const result = new Headers();
 
-export function getLicenseStatus(license: License): LicenseStatus {
-  if (license.revoked) {
-    return 'revoked';
-  }
+  sources.forEach((source) => {
+    const headers = new Headers(source);
+    headers.forEach((value, key) => result.set(key, value));
+  });
 
-  if (
-    license.type === 'timed' &&
-    license.expiresAt &&
-    new Date(license.expiresAt) < new Date()
-  ) {
-    return 'expired';
-  }
-
-  return 'active';
+  return result;
 }
