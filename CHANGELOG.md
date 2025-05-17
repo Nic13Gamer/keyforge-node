@@ -1,5 +1,11 @@
 # keyforge-js
 
+## 1.1.3
+
+### Patch Changes
+
+- 815cc7e: Use new license key header
+
 ## 1.1.2
 
 ### Patch Changes
