@@ -1,0 +1,31 @@
+{
+  "name": "keyforge-js",
+  "version": "1.1.3",
+  "description": "Node.js library for interacting with the Keyforge API",
+  "scripts": {
+    "build": "tsdown",
+    "lint": "tsc"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^22.16.0",
+    "tsdown": "^0.12.9",
+    "typescript": "^5.8.3"
+  },
+  "license": "MIT",
+  "homepage": "https://keyforge.dev",
+  "author": "Keyforge",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nic13Gamer/keyforge-node.git"
+  }
+}
