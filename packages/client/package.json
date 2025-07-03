@@ -1,7 +1,7 @@
 {
-  "name": "keyforge-js",
-  "version": "1.1.3",
-  "description": "Node.js library for interacting with the Keyforge API",
+  "name": "@keyforge/client",
+  "version": "0.0.0",
+  "description": "Keyforge SDK for client applications",
   "scripts": {
     "build": "tsdown",
     "lint": "tsc"
@@ -14,6 +14,11 @@
       "import": "./dist/index.mjs",
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./offline": {
+      "import": "./dist/offline/index.mjs",
+      "types": "./dist/offline/index.d.ts",
+      "default": "./dist/offline/index.js"
     }
   },
   "devDependencies": {
@@ -21,6 +26,13 @@
     "tsdown": "^0.12.9",
     "typescript": "^5.8.3"
   },
+  "dependencies": {},
+  "keywords": [
+    "software license",
+    "license key",
+    "offline license",
+    "license management"
+  ],
   "license": "MIT",
   "homepage": "https://keyforge.dev",
   "author": "Keyforge",

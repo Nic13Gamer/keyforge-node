@@ -21,6 +21,18 @@ importers:
         specifier: ^5.8.3
         version: 5.8.3
 
+  packages/client:
+    devDependencies:
+      '@types/node':
+        specifier: ^22.16.0
+        version: 22.16.0
+      tsdown:
+        specifier: ^0.12.9
+        version: 0.12.9(typescript@5.8.3)
+      typescript:
+        specifier: ^5.8.3
+        version: 5.8.3
+
   packages/server:
     devDependencies:
       '@types/node':
