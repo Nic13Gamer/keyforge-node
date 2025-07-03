@@ -26,7 +26,7 @@ const keyforge = new Keyforge('sk_1234');
 
 ## Usage
 
-To get started using the SDK, follow the quickstart guide [here](https://docs.keyforge.dev/quickstart).
+To get started using the SDK, follow the quickstart guide [here](https://docs.keyforge.dev/quickstart-server).
 
 ## License
 

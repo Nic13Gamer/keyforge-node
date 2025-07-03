@@ -1,6 +1,6 @@
-# Keyforge Node
+# Keyforge
 
-The monorepo for the Keyforge SDKs.
+The monorepo for Keyforge SDKs.
 
 Documentation is available [here](https://docs.keyforge.dev).
 
