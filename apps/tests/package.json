@@ -1,0 +1,14 @@
+{
+  "name": "@repo/tests",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "tsx index.ts"
+  },
+  "dependencies": {
+    "@keyforge/client": "workspace:*",
+    "keyforge-js": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.3"
+  }
+}
