@@ -15,10 +15,10 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./offline": {
-      "import": "./dist/offline/index.mjs",
-      "types": "./dist/offline/index.d.ts",
-      "default": "./dist/offline/index.js"
+    "./token": {
+      "import": "./dist/token/index.mjs",
+      "types": "./dist/token/index.d.ts",
+      "default": "./dist/token/index.js"
     }
   },
   "devDependencies": {
@@ -33,7 +33,8 @@
     "software license",
     "license key",
     "offline license",
-    "license management"
+    "license management",
+    "license key token"
   ],
   "license": "MIT",
   "homepage": "https://keyforge.dev",
