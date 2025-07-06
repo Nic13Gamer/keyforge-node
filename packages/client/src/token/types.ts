@@ -98,6 +98,12 @@ export type ValidateAndRefreshTokenReturn =
   | {
       isValid: true;
       didRefresh: boolean;
+      /**
+       * The token is valid but has already expired.
+       *
+       * You should not prompt the user to activate the license if this is `true`. A network error probably occurred during the refresh attempt.
+       */
+      isValidButExpired: false;
       data: TokenPayload;
       token: string;
       error: null;
@@ -105,6 +111,12 @@ export type ValidateAndRefreshTokenReturn =
   | {
       isValid: false;
       didRefresh: boolean;
+      /**
+       * The token is valid but has already expired.
+       *
+       * You should not prompt the user to activate the license if this is `true`. A network error probably occurred during the refresh attempt.
+       */
+      isValidButExpired: boolean;
       data: null;
       token: null;
       error: { code: ValidateAndRefreshTokenErrorCode; message: string };

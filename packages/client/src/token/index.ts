@@ -64,6 +64,7 @@ export async function validateAndRefreshToken({
         return {
           isValid: false,
           didRefresh: false,
+          isValidButExpired: fetchResult.error.code === 'network_error',
           data: null,
           token: null,
           error: fetchResult.error,
@@ -81,6 +82,7 @@ export async function validateAndRefreshToken({
         return {
           isValid: false,
           didRefresh: true,
+          isValidButExpired: false,
           data: null,
           token: null,
           error: newVerifyResult.error,
@@ -90,6 +92,7 @@ export async function validateAndRefreshToken({
       return {
         isValid: true,
         didRefresh: true,
+        isValidButExpired: false,
         data: newVerifyResult.data,
         token: fetchResult.token,
         error: null,
@@ -99,6 +102,7 @@ export async function validateAndRefreshToken({
     return {
       isValid: false,
       didRefresh: false,
+      isValidButExpired: false,
       data: null,
       token: null,
       error: verifyResult.error,
@@ -129,6 +133,7 @@ export async function validateAndRefreshToken({
         return {
           isValid: true,
           didRefresh: true,
+          isValidButExpired: false,
           data: newVerifyResult.data,
           token: fetchResult.token,
           error: null,
@@ -139,6 +144,7 @@ export async function validateAndRefreshToken({
     return {
       isValid: true,
       didRefresh: false,
+      isValidButExpired: false,
       data: verifyResult.data,
       token,
       error: null,
@@ -149,6 +155,7 @@ export async function validateAndRefreshToken({
   return {
     isValid: true,
     didRefresh: false,
+    isValidButExpired: false,
     data: verifyResult.data,
     token,
     error: null,
