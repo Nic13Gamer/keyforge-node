@@ -141,6 +141,22 @@ export async function validateAndRefreshToken({
       }
     }
 
+    if (
+      !fetchResult.isValid &&
+      ['invalid_license', 'license_expired', 'license_revoked'].includes(
+        fetchResult.error.code
+      )
+    ) {
+      return {
+        isValid: false,
+        didRefresh: true,
+        isValidButExpired: false,
+        data: null,
+        token: null,
+        error: fetchResult.error,
+      };
+    }
+
     return {
       isValid: true,
       didRefresh: false,

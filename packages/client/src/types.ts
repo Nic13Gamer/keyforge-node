@@ -71,7 +71,6 @@ export type ActivateLicenseErrorCode =
   | 'invalid_license'
   | 'license_revoked'
   | 'license_expired'
-  | 'device_already_activated'
   | 'max_devices_reached';
 
 export type ActivateLicenseReturn =
