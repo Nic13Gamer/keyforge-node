@@ -1,6 +1,7 @@
 {
   "name": "@repo/tests",
   "version": "0.0.0",
+  "private": true,
   "scripts": {
     "start": "tsx index.ts"
   },
