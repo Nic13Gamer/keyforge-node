@@ -1,6 +1,6 @@
 # Keyforge Client SDK
 
-The client library for interacting with the Keyforge API.
+The client-side library for interacting with the Keyforge public API.
 
 Documentation is available [here](https://docs.keyforge.dev).
 
