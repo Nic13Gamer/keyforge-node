@@ -47,7 +47,7 @@ const { isValid } = await activateLicense({
 
 ### Manage license tokens
 
-License tokens allow licenses to be validated wihout an internet connection.
+License tokens allow licenses to be validated without an internet connection.
 
 #### Validate and refresh token
 
